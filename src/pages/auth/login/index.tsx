@@ -1,49 +1,54 @@
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Link } from "react-router-dom"
-import toast from "react-hot-toast"
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { loginSchema, type LoginInput } from "@/lib/validations/auth"
-import { AuthService } from "@/services/auth.service"
-import { AxiosError } from "axios"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { loginSchema, type LoginInput } from "@/lib/validations/auth";
+import { AuthService } from "@/services/auth.service";
+import { AxiosError } from "axios";
 
 export default function Login() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginInput>({
     resolver: zodResolver(loginSchema),
-  })
-  console.log("errors", errors)
+  });
+  console.log("errors", errors);
   const onSubmit = async (data: LoginInput) => {
-    const loadingToast = toast.loading('Logging in...')
+    const loadingToast = toast.loading("Logging in...");
     try {
-      setIsLoading(true)
-      const authService = AuthService.getInstance()
-      const response = await authService.login(data)
-      localStorage.setItem("token", response.token)
-      localStorage.setItem("user", JSON.stringify(response.user))
-      
-      toast.success('Successfully logged in!', {
+      setIsLoading(true);
+      const authService = AuthService.getInstance();
+      const response = await authService.login(data);
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("user", JSON.stringify(response.user));
+
+      toast.success("Successfully logged in!", {
         id: loadingToast,
-      })
-      
-      window.location.replace("/dashboard")
+      });
+
+      window.location.replace("/dashboard");
     } catch (error) {
-      toast.error(error instanceof AxiosError ? error.response?.data.message : 'Failed to login', {
-        id: loadingToast,
-      })
-      console.error("Login failed:", error)
+      toast.error(
+        error instanceof AxiosError
+          ? error.response?.data.message
+          : "Failed to login",
+        {
+          id: loadingToast,
+        },
+      );
+      console.error("Login failed:", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
@@ -87,11 +92,7 @@ export default function Login() {
               Forgot Password?
             </Link>
           </div>
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={isLoading}
-          >
+          <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? "Loading..." : "Login"}
           </Button>
         </form>
@@ -103,5 +104,5 @@ export default function Login() {
         </div>
       </div>
     </div>
-  )
+  );
 }

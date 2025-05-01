@@ -1,21 +1,21 @@
-import * as React from "react"
-import { Eye, EyeOff } from "lucide-react"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-type PasswordInputProps = React.InputHTMLAttributes<HTMLInputElement>
+type PasswordInputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
   ({ className, ...props }, ref) => {
-    const [showPassword, setShowPassword] = React.useState(false)
+    const [showPassword, setShowPassword] = React.useState(false);
 
     return (
       <div className="relative">
         <input
           type={showPassword ? "text" : "password"}
           className={cn(
-          "flex h-12 w-full rounded-full border border-input bg-background px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
+            "flex h-12 w-full rounded-full border border-input bg-background px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
             // "flex h-[52px] w-full rounded-[14px] border border-input bg-background px-4 py-3 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 pr-12",
-            className
+            className,
           )}
           ref={ref}
           {...props}
@@ -33,10 +33,10 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
           )}
         </button>
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-PasswordInput.displayName = "PasswordInput"
+PasswordInput.displayName = "PasswordInput";
 
-export { PasswordInput } 
+export { PasswordInput };

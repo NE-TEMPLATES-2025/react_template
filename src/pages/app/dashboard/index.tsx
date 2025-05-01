@@ -1,7 +1,6 @@
-import { Layout } from "@/components/layouts/Layout"
+import { Layout } from "@/components/layouts/Layout";
 
 export default function DashboardHome() {
-  
   return (
     <Layout>
       <div className="space-y-4 px-4">
@@ -60,5 +59,5 @@ export default function DashboardHome() {
         </div>
       </div>
     </Layout>
-  )
+  );
 }

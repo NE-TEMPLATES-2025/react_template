@@ -1,7 +1,7 @@
-import { useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { Home, LogOut } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Home, LogOut } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,24 +9,24 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { useAuth } from "@/contexts/AuthContext"
-import toast from "react-hot-toast"
+} from "@/components/ui/dialog";
+import { useAuth } from "@/contexts/AuthContext";
+import toast from "react-hot-toast";
 
 interface DashboardLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function Layout({ children }: DashboardLayoutProps) {
-  const [showLogoutDialog, setShowLogoutDialog] = useState(false)
-  const { logout, user } = useAuth()
-  const navigate = useNavigate()
+  const [showLogoutDialog, setShowLogoutDialog] = useState(false);
+  const { logout, user } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    logout()
-    toast.success("Logged out successfully!")
-    navigate("/auth/login")
-  }
+    logout();
+    toast.success("Logged out successfully!");
+    navigate("/auth/login");
+  };
 
   return (
     <div className="flex h-screen bg-background">
@@ -72,9 +72,7 @@ export function Layout({ children }: DashboardLayoutProps) {
 
       {/* Main content */}
       <main className="flex-1 overflow-y-auto">
-        <div className="container py-6">
-          {children}
-        </div>
+        <div className="container py-6">{children}</div>
       </main>
 
       {/* Logout confirmation dialog */}
@@ -83,7 +81,8 @@ export function Layout({ children }: DashboardLayoutProps) {
           <DialogHeader>
             <DialogTitle>Confirm Logout</DialogTitle>
             <DialogDescription>
-              Are you sure you want to logout? You'll need to login again to access your account.
+              Are you sure you want to logout? You'll need to login again to
+              access your account.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -104,5 +103,5 @@ export function Layout({ children }: DashboardLayoutProps) {
         </DialogContent>
       </Dialog>
     </div>
-  )
-} 
+  );
+}

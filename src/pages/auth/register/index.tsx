@@ -1,58 +1,59 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Link, useNavigate } from "react-router-dom"
-import toast from "react-hot-toast"
-import { AxiosError } from "axios"
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { AxiosError } from "axios";
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { PasswordInput } from "@/components/ui/password-input"
-import { registerSchema, type RegisterInput } from "@/lib/validations/auth"
-import { AuthService } from "@/services/auth.service"
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { PasswordInput } from "@/components/ui/password-input";
+import { registerSchema, type RegisterInput } from "@/lib/validations/auth";
+import { AuthService } from "@/services/auth.service";
 
 export default function Register() {
-  const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
-  
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
-  })
+  });
 
   const onSubmit = async (data: RegisterInput) => {
-    const loadingToast = toast.loading('Creating your account...')
+    const loadingToast = toast.loading("Creating your account...");
     try {
-      setIsLoading(true)
-      const authService = AuthService.getInstance()
-      const response = await authService.register(data)
-      
+      setIsLoading(true);
+      const authService = AuthService.getInstance();
+      const response = await authService.register(data);
+
       // Store the token in localStorage or your preferred storage method
-      localStorage.setItem("token", response.token)
-      
-      toast.success('Account created successfully!', {
+      localStorage.setItem("token", response.token);
+
+      toast.success("Account created successfully!", {
         id: loadingToast,
-      })
-      
+      });
+
       // Redirect to dashboard or home page
-      navigate("/dashboard")
+      navigate("/dashboard");
     } catch (error) {
-      const errorMessage = error instanceof AxiosError 
-        ? error.response?.data?.message || 'Failed to create account'
-        : 'Failed to create account'
-      
+      const errorMessage =
+        error instanceof AxiosError
+          ? error.response?.data?.message || "Failed to create account"
+          : "Failed to create account";
+
       toast.error(errorMessage, {
         id: loadingToast,
-      })
+      });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
@@ -66,11 +67,7 @@ export default function Register() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="names">Full Name</Label>
-            <Input
-              id="names"
-              placeholder="John Doe"
-              {...register("names")}
-            />
+            <Input id="names" placeholder="John Doe" {...register("names")} />
             {errors.names && (
               <p className="text-sm text-red-500">{errors.names.message}</p>
             )}
@@ -110,11 +107,7 @@ export default function Register() {
               <p className="text-sm text-red-500">{errors.password.message}</p>
             )}
           </div>
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={isLoading}
-          >
+          <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? "Creating Account..." : "Create Account"}
           </Button>
         </form>
@@ -126,5 +119,5 @@ export default function Register() {
         </div>
       </div>
     </div>
-  )
+  );
 }

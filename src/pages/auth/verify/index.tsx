@@ -1,84 +1,86 @@
-import { useState } from "react"
-import { useLocation, Link, useNavigate } from "react-router-dom"
-import toast from "react-hot-toast"
-import { AxiosError } from "axios"
-import { ArrowLeft } from "lucide-react"
+import { useState } from "react";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { AxiosError } from "axios";
+import { ArrowLeft } from "lucide-react";
 
-import { Button } from "@/components/ui/button"
-import { OTPInput } from "@/components/ui/otp-input"
-import { AuthService } from "@/services/auth.service"
+import { Button } from "@/components/ui/button";
+import { OTPInput } from "@/components/ui/otp-input";
+import { AuthService } from "@/services/auth.service";
 
 export default function Verify() {
-  const [isLoading, setIsLoading] = useState(false)
-  const [isResending, setIsResending] = useState(false)
-  const [otp, setOtp] = useState("")
-  const location = useLocation()
-  const navigate = useNavigate()
-  
-  const email = location.state?.email
+  const [isLoading, setIsLoading] = useState(false);
+  const [isResending, setIsResending] = useState(false);
+  const [otp, setOtp] = useState("");
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const email = location.state?.email;
   if (!email) {
-    navigate("/auth/forgot-password")
-    return null
+    navigate("/auth/forgot-password");
+    return null;
   }
 
   const handleVerify = async (code: string) => {
     if (code.length !== 6) {
-      toast.error('Please enter all 6 digits')
-      return
+      toast.error("Please enter all 6 digits");
+      return;
     }
 
-    const loadingToast = toast.loading('Verifying OTP...')
+    const loadingToast = toast.loading("Verifying OTP...");
     try {
-      setIsLoading(true)
-      const authService = AuthService.getInstance()
-      await authService.verifyOtp({ code, email })
-      
-      toast.success('OTP verified successfully!', {
+      setIsLoading(true);
+      const authService = AuthService.getInstance();
+      await authService.verifyOtp({ code, email });
+
+      toast.success("OTP verified successfully!", {
         id: loadingToast,
-      })
-      
-      navigate("/auth/reset-password", { state: { email, code } })
+      });
+
+      navigate("/auth/reset-password", { state: { email, code } });
     } catch (error) {
-      const errorMessage = error instanceof AxiosError 
-        ? error.response?.data?.message || 'Invalid OTP'
-        : 'Invalid OTP'
-      
+      const errorMessage =
+        error instanceof AxiosError
+          ? error.response?.data?.message || "Invalid OTP"
+          : "Invalid OTP";
+
       toast.error(errorMessage, {
         id: loadingToast,
-      })
+      });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleResend = async () => {
-    const loadingToast = toast.loading('Resending OTP...')
+    const loadingToast = toast.loading("Resending OTP...");
     try {
-      setIsResending(true)
-      const authService = AuthService.getInstance()
-      await authService.resendOtp(email)
-      
-      toast.success('OTP resent successfully!', {
+      setIsResending(true);
+      const authService = AuthService.getInstance();
+      await authService.resendOtp(email);
+
+      toast.success("OTP resent successfully!", {
         id: loadingToast,
-      })
+      });
     } catch (error) {
-      const errorMessage = error instanceof AxiosError 
-        ? error.response?.data?.message || 'Failed to resend OTP'
-        : 'Failed to resend OTP'
-      
+      const errorMessage =
+        error instanceof AxiosError
+          ? error.response?.data?.message || "Failed to resend OTP"
+          : "Failed to resend OTP";
+
       toast.error(errorMessage, {
         id: loadingToast,
-      })
+      });
     } finally {
-      setIsResending(false)
+      setIsResending(false);
     }
-  }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
       <div className="mx-auto w-full max-w-[500px] space-y-6 p-4">
-        <Link 
-          to="/auth/forgot-password" 
+        <Link
+          to="/auth/forgot-password"
           className="inline-flex items-center text-sm text-muted-foreground hover:text-primary"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
@@ -91,14 +93,12 @@ export default function Verify() {
               <span className="text-2xl text-primary">🔑</span>
             </div>
           </div>
-          
+
           <h1 className="text-2xl font-bold text-center">OTP Verification</h1>
           <p className="mt-2 text-sm text-center text-muted-foreground max-w-[400px]">
             We've sent an OTP code check your email{" "}
-            <span className="font-medium text-foreground">
-              ({email})
-            </span>{" "}
-            and fill it in.
+            <span className="font-medium text-foreground">({email})</span> and
+            fill it in.
           </p>
         </div>
 
@@ -107,7 +107,7 @@ export default function Verify() {
             onComplete={(value) => setOtp(value)}
             className="justify-center"
           />
-          
+
           <Button
             type="submit"
             className="w-full"
@@ -132,5 +132,5 @@ export default function Verify() {
         </div>
       </div>
     </div>
-  )
+  );
 }

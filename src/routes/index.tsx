@@ -1,30 +1,30 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Login from '@/pages/auth/login'
-import Register from '@/pages/auth/register'
-import ForgotPassword from '@/pages/auth/forgot-password'
-import Verify from '@/pages/auth/verify'
-import ResetPassword from '@/pages/auth/reset'
-import NotFound from '@/pages/commons/404'
-import DashboardHome from '@/pages/app/dashboard'
-import { AuthProvider, useAuth } from '@/contexts/AuthContext'
-import { Loader } from '@/components/ui/loader'
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "@/pages/auth/login";
+import Register from "@/pages/auth/register";
+import ForgotPassword from "@/pages/auth/forgot-password";
+import Verify from "@/pages/auth/verify";
+import ResetPassword from "@/pages/auth/reset";
+import NotFound from "@/pages/commons/404";
+import DashboardHome from "@/pages/app/dashboard";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import { Loader } from "@/components/ui/loader";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, isLoading } = useAuth()
+  const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {
-    return <Loader/>
+    return <Loader />;
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/auth/login" replace />
+    return <Navigate to="/auth/login" replace />;
   }
 
-  return children
+  return children;
 }
 
 const AppRoutes = () => {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated } = useAuth();
   return (
     <Routes>
       {/* Auth routes */}
@@ -58,8 +58,8 @@ const AppRoutes = () => {
       {/* 404 */}
       <Route path="*" element={<NotFound />} />
     </Routes>
-  )
-}
+  );
+};
 
 export default function PagesRoutes() {
   return (
@@ -68,5 +68,5 @@ export default function PagesRoutes() {
         <AppRoutes />
       </AuthProvider>
     </BrowserRouter>
-  )
+  );
 }
