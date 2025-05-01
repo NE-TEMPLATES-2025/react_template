@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Link, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import toast from "react-hot-toast"
 
 import { Button } from "@/components/ui/button"
@@ -13,8 +13,6 @@ import { AxiosError } from "axios"
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
-  const navigate = useNavigate()
-  
   const {
     register,
     handleSubmit,
@@ -29,16 +27,14 @@ export default function Login() {
       setIsLoading(true)
       const authService = AuthService.getInstance()
       const response = await authService.login(data)
-      
-      // Store the token in localStorage or your preferred storage method
       localStorage.setItem("token", response.token)
+      localStorage.setItem("user", JSON.stringify(response.user))
       
       toast.success('Successfully logged in!', {
         id: loadingToast,
       })
       
-      // Redirect to dashboard or home page
-      navigate("/dashboard")
+      window.location.replace("/dashboard")
     } catch (error) {
       toast.error(error instanceof AxiosError ? error.response?.data.message : 'Failed to login', {
         id: loadingToast,

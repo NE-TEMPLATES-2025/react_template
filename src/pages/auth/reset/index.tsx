@@ -48,7 +48,7 @@ export default function ResetPassword() {
       const authService = AuthService.getInstance()
       await authService.resetPassword({
         email,
-        code,
+        otp: code,
         password: values.password,
       })
       
