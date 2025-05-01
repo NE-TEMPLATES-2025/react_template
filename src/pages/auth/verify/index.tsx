@@ -15,7 +15,6 @@ export default function Verify() {
   const location = useLocation()
   const navigate = useNavigate()
   
-  // Get email from state or redirect to forgot password
   const email = location.state?.email
   if (!email) {
     navigate("/auth/forgot-password")
@@ -38,7 +37,6 @@ export default function Verify() {
         id: loadingToast,
       })
       
-      // Redirect to reset password page
       navigate("/auth/reset-password", { state: { email, code } })
     } catch (error) {
       const errorMessage = error instanceof AxiosError 
@@ -88,9 +86,7 @@ export default function Verify() {
         </Link>
 
         <div className="flex flex-col items-center justify-center">
-          {/* You can add your logo here */}
           <div className="h-16 w-16 mb-6">
-            {/* Replace with your actual logo */}
             <div className="w-full h-full bg-primary/10 rounded-full flex items-center justify-center">
               <span className="text-2xl text-primary">🔑</span>
             </div>

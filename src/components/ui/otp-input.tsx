@@ -70,10 +70,10 @@ export function OTPInput({
       }
     })
     setOtp(newOtp)
-
     // Focus last filled input or first empty input
-    const lastFilledIndex = newOtp.findLastIndex((digit: string) => digit !== "")
-    const focusIndex = lastFilledIndex < length - 1 ? lastFilledIndex + 1 : lastFilledIndex
+    const lastFilledIndex = newOtp.slice().reverse().findIndex((digit: string) => digit !== "")
+    const reversedIndex = lastFilledIndex === -1 ? -1 : newOtp.length - 1 - lastFilledIndex
+    const focusIndex = reversedIndex < length - 1 ? reversedIndex + 1 : reversedIndex
     inputRefs.current[focusIndex].focus()
 
     if (pasteData.length === length && onComplete) {
