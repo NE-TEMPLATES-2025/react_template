@@ -21,7 +21,6 @@ export class AuthService {
       if (response.status !== 200) {
         throw new Error("Login failed")
       }
-      console.log("response here", response.data)
       return response.data?.data
     } catch (error) {
       throw error

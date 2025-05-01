@@ -7,13 +7,13 @@ import ResetPassword from '@/pages/auth/reset'
 import NotFound from '@/pages/commons/404'
 import DashboardHome from '@/pages/app/dashboard'
 import { AuthProvider, useAuth } from '@/contexts/AuthContext'
+import { Loader } from '@/components/ui/loader'
 
-// Protected Route component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isLoading } = useAuth()
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <Loader/>
   }
 
   if (!isAuthenticated) {
@@ -23,9 +23,8 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   return children
 }
 
-function AppRoutes() {
+const AppRoutes = () => {
   const { isAuthenticated } = useAuth()
-
   return (
     <Routes>
       {/* Auth routes */}
@@ -45,8 +44,7 @@ function AppRoutes() {
         }
       />
 
-      {/* Redirect root to dashboard if authenticated, otherwise to login */}
-      <Route
+      <Route //* Redirect root to dashboard if authenticated, otherwise to login
         path="/"
         element={
           isAuthenticated ? (

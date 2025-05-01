@@ -11,6 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { useAuth } from "@/contexts/AuthContext"
+import toast from "react-hot-toast"
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -23,6 +24,7 @@ export function Layout({ children }: DashboardLayoutProps) {
 
   const handleLogout = () => {
     logout()
+    toast.success("Logged out successfully!")
     navigate("/auth/login")
   }
 
@@ -92,6 +94,7 @@ export function Layout({ children }: DashboardLayoutProps) {
               Cancel
             </Button>
             <Button
+              className="bg-red-500 hover:bg-red-600"
               variant="default"
               onClick={handleLogout}
             >
