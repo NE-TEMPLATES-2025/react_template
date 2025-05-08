@@ -29,7 +29,7 @@ export class AuthService {
 
   async register(data: RegisterInput): Promise<{ token: string; user: User }> {
     try {
-      const response = await UnauthorizedApi.post("/auth/register", data);
+      const response = await UnauthorizedApi.post("/user/create", data);
 
       if (response.status !== 201) {
         throw new Error("Registration failed");
