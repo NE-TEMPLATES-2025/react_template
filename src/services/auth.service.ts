@@ -59,7 +59,8 @@ export class AuthService {
   async verifyOtp(data: { code: string; email: string }): Promise<void> {
     try {
       const response = await UnauthorizedApi.patch(
-        "/auth/verify-email/" + data.code,
+        "/auth/verify-code/",
+        data
       );
 
       if (response.status !== 200) {
