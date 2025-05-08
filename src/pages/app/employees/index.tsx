@@ -71,7 +71,7 @@ export default function EmployeesPage() {
 
   const handleSearch = (value: string) => {
     setSearchQuery(value);
-    setFilters(prev => ({ ...prev, page: 1 }));
+    setFilters((prev) => ({ ...prev, page: 1 }));
   };
 
   const handlePageChange = (page: number) => {
@@ -133,30 +133,37 @@ export default function EmployeesPage() {
                     employees?.map((employee) => (
                       <TableRow key={employee.id}>
                         <TableCell className="py-4">
-                        {employee.firstName + " " + employee.lastName}
-                      </TableCell>
-                      <TableCell className="py-4">{employee.email}</TableCell>
-                      <TableCell className="py-4">{employee.telephone}</TableCell>
-                      <TableCell className="py-4">{employee.nationalId}</TableCell>
-                      <TableCell className="capitalize">
-                        {employee.department}
-                      </TableCell>
-                      <TableCell className="py-4">{employee.position}</TableCell>
-                      <TableCell className="py-4 capitalize">
-                        {employee.laptopManufacturer}
-                      </TableCell>
-                      <TableCell className="py-4 capitalize">
-                        {employee.laptopModel}
-                      </TableCell>
-                      <TableCell className="py-4 capitalize">
-                        {employee.serialNumber}
-                      </TableCell>
-                    </TableRow>
+                          {employee.firstName + " " + employee.lastName}
+                        </TableCell>
+                        <TableCell className="py-4">{employee.email}</TableCell>
+                        <TableCell className="py-4">
+                          {employee.telephone}
+                        </TableCell>
+                        <TableCell className="py-4">
+                          {employee.nationalId}
+                        </TableCell>
+                        <TableCell className="capitalize">
+                          {employee.department}
+                        </TableCell>
+                        <TableCell className="py-4">
+                          {employee.position}
+                        </TableCell>
+                        <TableCell className="py-4 capitalize">
+                          {employee.laptopManufacturer}
+                        </TableCell>
+                        <TableCell className="py-4 capitalize">
+                          {employee.laptopModel}
+                        </TableCell>
+                        <TableCell className="py-4 capitalize">
+                          {employee.serialNumber}
+                        </TableCell>
+                      </TableRow>
                     ))
                   ) : (
                     <TableRow>
                       <TableCell colSpan={9} className="h-24 text-center">
-                        No employees found {searchQuery ? "for " + searchQuery : ""}
+                        No employees found{" "}
+                        {searchQuery ? "for " + searchQuery : ""}
                       </TableCell>
                     </TableRow>
                   )}
@@ -183,13 +190,15 @@ export default function EmployeesPage() {
                       (page) => (
                         <Button
                           key={page}
-                          variant={filters.page === page ? "default" : "outline"}
+                          variant={
+                            filters.page === page ? "default" : "outline"
+                          }
                           size="sm"
                           onClick={() => handlePageChange(page)}
                         >
                           {page}
                         </Button>
-                      )
+                      ),
                     )}
                     <Button
                       variant="outline"
