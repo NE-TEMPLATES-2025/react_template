@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Home, LogOut } from "lucide-react";
+import { Home, LogOut, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -42,6 +42,13 @@ export function Layout({ children }: DashboardLayoutProps) {
           >
             <Home className="h-4 w-4" />
             Home
+          </Link>
+          <Link
+            to="/dashboard/employees"
+            className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground"
+          >
+            <Users className="h-4 w-4" />
+            Employees
           </Link>
           <button
             onClick={() => setShowLogoutDialog(true)}

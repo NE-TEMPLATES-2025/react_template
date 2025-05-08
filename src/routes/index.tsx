@@ -5,9 +5,9 @@ import ForgotPassword from "@/pages/auth/forgot-password";
 import Verify from "@/pages/auth/verify";
 import ResetPassword from "@/pages/auth/reset";
 import NotFound from "@/pages/commons/404";
-import DashboardHome from "@/pages/app/dashboard";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { Loader } from "@/components/ui/loader";
+import EmployeesPage from "@/pages/app/employees";
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isLoading } = useAuth();
@@ -39,7 +39,15 @@ const AppRoutes = () => {
         path="/dashboard"
         element={
           <ProtectedRoute>
-            <DashboardHome />
+            <EmployeesPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/employees"
+        element={
+          <ProtectedRoute>
+            <EmployeesPage />
           </ProtectedRoute>
         }
       />
