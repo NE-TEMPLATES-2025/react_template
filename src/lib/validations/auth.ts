@@ -10,13 +10,16 @@ export const loginSchema = z.object({
 });
 
 export const registerSchema = z.object({
-  names: z.string().min(2, {
-    message: "Full name must be at least 2 characters long",
+  firstName: z.string().min(2, {
+    message: "First name name must be at least 2 characters long",
+  }),
+  lastName: z.string().min(2, {
+    message: "Last name must be at least 2 characters long",
   }),
   email: z.string().email({
     message: "Please enter a valid email address",
   }),
-  telephone: z.string().regex(/^\+?[1-9]\d{1,14}$/, {
+  phoneNumber: z.string().regex(/^\+?[1-9]\d{1,14}$/, {
     message: "Please enter a valid phone number",
   }),
   password: z.string().min(8, {

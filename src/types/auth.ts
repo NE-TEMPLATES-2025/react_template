@@ -1,8 +1,9 @@
 export interface User {
   id: string;
   email: string;
-  names: string;
-  telephone?: string;
+  firstName: string;
+  lastName:string;
+  phoneNumber?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -23,9 +24,10 @@ export interface AuthContextType extends AuthState {
 }
 
 export interface RegisterInput {
-  names: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  telephone: string;
+  phoneNumber: string;
   password: string;
 }
 

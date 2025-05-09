@@ -30,7 +30,7 @@ export function AddEmployeeDialog({
     firstName: "",
     lastName: "",
     email: "",
-    telephone: "",
+    phoneNumber: "",
     nationalId: "",
     department: "",
     position: "",
@@ -57,7 +57,7 @@ export function AddEmployeeDialog({
         firstName: "",
         lastName: "",
         email: "",
-        telephone: "",
+        phoneNumber: "",
         nationalId: "",
         department: "",
         position: "",
@@ -121,12 +121,12 @@ export function AddEmployeeDialog({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="telephone">Phone Number</Label>
+              <Label htmlFor="phoneNumber">Phone Number</Label>
               <Input
-                id="telephone"
-                name="telephone"
+                id="phoneNumber"
+                name="phoneNumber"
                 placeholder="Enter phone number"
-                value={formData.telephone}
+                value={formData.phoneNumber}
                 onChange={handleChange}
                 required
               />

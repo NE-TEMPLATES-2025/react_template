@@ -3,7 +3,7 @@ export interface Employee {
   firstName: string;
   lastName: string;
   email: string;
-  telephone: string;
+  phoneNumber: string;
   nationalId: string;
   department: string;
   position: string;
@@ -16,9 +16,7 @@ export interface Employee {
 
 export interface EmployeeResponse {
   data: {
-    data: {
-      employees: Employee[];
-    };
+    data: Employee[],
     meta?: {
       total: number;
       currentPage: number;
@@ -27,10 +25,9 @@ export interface EmployeeResponse {
   };
 }
 
+
 export interface SearchEmployeeResponse {
-  data: {
-    employee: Employee[];
-  };
+  data: Employee[]
 }
 
 export interface EmployeeFilters {

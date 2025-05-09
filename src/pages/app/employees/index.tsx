@@ -37,7 +37,7 @@ export default function EmployeesPage() {
     try {
       setIsLoading(true);
       const response = await employeeService.getEmployees(filters);
-      setEmployees(response.data.data.employees);
+      setEmployees(response.data.data);
       setTotalItems(response.data.meta?.total || 0);
     } catch (error) {
       toast.error("Failed to fetch employees");
@@ -67,6 +67,9 @@ export default function EmployeesPage() {
     } else {
       fetchEmployees();
     }
+
+    console.log("Employees",employees);
+    
   }, [debouncedSearch, filters.page]);
 
   const handleSearch = (value: string) => {
@@ -129,7 +132,7 @@ export default function EmployeesPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {employees.length > 0 ? (
+                  {employees ? (
                     employees?.map((employee) => (
                       <TableRow key={employee.id}>
                         <TableCell className="py-4">
@@ -137,7 +140,7 @@ export default function EmployeesPage() {
                         </TableCell>
                         <TableCell className="py-4">{employee.email}</TableCell>
                         <TableCell className="py-4">
-                          {employee.telephone}
+                          {employee.phoneNumber}
                         </TableCell>
                         <TableCell className="py-4">
                           {employee.nationalId}

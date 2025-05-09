@@ -65,11 +65,18 @@ export default function Register() {
           </p>
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div className="space-y-2">
+            <Label htmlFor="firstName">First Name</Label>
+            <Input id="firstName" placeholder="Paccy" {...register("firstName")} />
+            {errors.firstName && (
+              <p className="text-sm text-red-500">{errors.firstName.message}</p>
+            )}
+          </div>
           <div className="space-y-2">
-            <Label htmlFor="names">Full Name</Label>
-            <Input id="names" placeholder="John Doe" {...register("names")} />
-            {errors.names && (
-              <p className="text-sm text-red-500">{errors.names.message}</p>
+            <Label htmlFor="names">Last Name</Label>
+            <Input id="names" placeholder="John Doe" {...register("lastName")} />
+            {errors.lastName && (
+              <p className="text-sm text-red-500">{errors.lastName.message}</p>
             )}
           </div>
           <div className="space-y-2">
@@ -90,10 +97,10 @@ export default function Register() {
               id="telephone"
               placeholder="+250700000000"
               type="tel"
-              {...register("telephone")}
+              {...register("phoneNumber")}
             />
-            {errors.telephone && (
-              <p className="text-sm text-red-500">{errors.telephone.message}</p>
+            {errors.phoneNumber && (
+              <p className="text-sm text-red-500">{errors.phoneNumber.message}</p>
             )}
           </div>
           <div className="space-y-2">

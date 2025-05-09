@@ -150,6 +150,7 @@ export function useAuth() {
   return context;
 }
 
+
 // Hook to protect routes
 export function useRequireAuth() {
   const auth = useAuth();

@@ -25,31 +25,31 @@ export class EmployeeService {
     if (filters.limit) queryParams.append("limit", filters.limit.toString());
 
     const response = await AuthorizedApi.get(
-      `/employees/all?${queryParams.toString()}`,
+      `/employee/all?${queryParams.toString()}`,
     );
     return response;
   }
 
   async searchEmployees(query: string): Promise<Employee[]> {
     const response = await AuthorizedApi.get<SearchEmployeeResponse>(
-      `/employees/search/${query}`,
+      `/employee/search?query=${query}`,
     );
-    return response.data.data.employee;
+    return response.data.data;
   }
 
   async createEmployee(
     data: Omit<Employee, "id" | "createdAt" | "updatedAt">,
   ): Promise<Employee> {
-    const response = await AuthorizedApi.post("/employees/register", data);
+    const response = await AuthorizedApi.post("/employee/create", data);
     return response.data;
   }
 
   async updateEmployee(id: string, data: Partial<Employee>): Promise<Employee> {
-    const response = await AuthorizedApi.patch(`/employees/${id}`, data);
+    const response = await AuthorizedApi.patch(`/employee/${id}`, data);
     return response.data;
   }
 
   async deleteEmployee(id: string): Promise<void> {
-    await AuthorizedApi.delete(`/employees/${id}`);
+    await AuthorizedApi.delete(`/employee/${id}`);
   }
 }

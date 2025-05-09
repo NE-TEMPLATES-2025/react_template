@@ -16,7 +16,7 @@ export class AuthService {
 
   async login(data: LoginInput): Promise<{ token: string; user: User }> {
     try {
-      const response = await UnauthorizedApi.post("/auth/login", data);
+      const response = await UnauthorizedApi.post("/auth/signin", data);
 
       if (response.status !== 200) {
         throw new Error("Login failed");
@@ -29,12 +29,12 @@ export class AuthService {
 
   async register(data: RegisterInput): Promise<{ token: string; user: User }> {
     try {
-      const response = await UnauthorizedApi.post("/user/create", data);
+      const response = await UnauthorizedApi.post("/user/signup", data);
 
       if (response.status !== 201) {
         throw new Error("Registration failed");
       }
-
+      
       return response.data;
     } catch (error) {
       throw error;

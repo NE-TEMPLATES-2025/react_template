@@ -65,11 +65,11 @@ export function Layout({ children }: DashboardLayoutProps) {
             <div className="flex items-center space-x-3">
               <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
                 <span className="text-sm font-medium text-primary">
-                  {user.names[0].toUpperCase()}
+                  {user.firstName[0].toUpperCase()} 
                 </span>
               </div>
               <div className="space-y-0.5">
-                <p className="text-sm font-medium">{user.names}</p>
+                <p className="text-sm font-medium">{user.firstName[0].toUpperCase()} {user.lastName[0].toUpperCase()}</p>
                 <p className="text-xs text-muted-foreground">{user.email}</p>
               </div>
             </div>
