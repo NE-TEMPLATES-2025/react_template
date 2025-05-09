@@ -31,6 +31,7 @@ export default function EmployeesPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const employeeService = EmployeeService.getInstance();
+
   const debouncedSearch = useDebounce(searchQuery, 300);
 
   const fetchEmployees = async () => {
@@ -68,7 +69,6 @@ export default function EmployeesPage() {
       fetchEmployees();
     }
 
-    console.log("Employees",employees);
     
   }, [debouncedSearch, filters.page]);
 
